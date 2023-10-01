@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+
+	"github.com/martinlaursen97/integration-test-exercises/pkg/util"
 )
 
 const (
@@ -73,6 +75,10 @@ func getCurrencyResponse(url string) (*CurrencyResponse, error) {
 }
 
 func (c *Currency) Convert(amount float64, targetCurrency *Currency) (float64, error) {
+	if c.Currency == targetCurrency.Currency {
+		return 0, fmt.Errorf("cannot convert between the same systems")
+	}
+
 	queryParams := "&base_currency=" + c.Currency +
 		"&currencies=" + targetCurrency.Currency
 	requestUrl := API_BASE_URL + API_KEY + queryParams
@@ -84,7 +90,7 @@ func (c *Currency) Convert(amount float64, targetCurrency *Currency) (float64, e
 	}
 
 	result := amount * currencyResponse.Data[targetCurrency.Currency].Value
-	return result, nil
+	return util.RoundToTwoDecimals(result), nil
 }
 
 func NewCurrency(currency string) (*Currency, error) {

@@ -1,9 +1,8 @@
 package main
 
 import (
-	"log"
-
-	"github.com/martinlaursen97/integration-test-exercises/pkg/converter"
+	"fmt"
+	"math"
 )
 
 func main() {
@@ -30,8 +29,10 @@ func main() {
 
 	// // log.Println(convertedCurrency)
 
-	grade := converter.NewGrade(converter.DK)
-	convertedGrade, _ := grade.Convert(12, converter.US)
-	log.Println(convertedGrade)
+	fmt.Println(RoundToTwoDecimals(0.39370078740157477))
 
+}
+
+func RoundToTwoDecimals(num float64) float64 {
+	return math.Round(num*100) / 100
 }

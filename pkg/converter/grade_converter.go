@@ -59,7 +59,7 @@ func (g *Grade) Convert(value any, targetSystem GradeType) (any, error) {
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 
-	log.Println("Connecting to the database")
+	log.Println("Connecting to the database...")
 	db, err := sql.Open("postgres", psqlInfo)
 
 	if err != nil {
@@ -73,7 +73,7 @@ func (g *Grade) Convert(value any, targetSystem GradeType) (any, error) {
 		return nil, err
 	}
 
-	log.Println("Successfully connected to the database")
+	log.Println("Successfully connected to the database!")
 
 	var query string
 	if g.system == DK {

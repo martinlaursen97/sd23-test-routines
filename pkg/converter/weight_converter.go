@@ -4,6 +4,11 @@ import "github.com/martinlaursen97/integration-test-exercises/pkg/util"
 
 type WeightType int
 
+const (
+	METRIC = iota
+	IMPERIAL
+)
+
 const LB_IN_KG = 0.453
 
 type Weight struct {

@@ -1,15 +1,12 @@
 package converter
 
 import (
+	"fmt"
+
 	"github.com/martinlaursen97/integration-test-exercises/pkg/util"
 )
 
 type LengthType int
-
-const (
-	METRIC = iota
-	IMPERIAL
-)
 
 const INCH_IN_CM = 2.54
 
@@ -18,15 +15,17 @@ type Length struct {
 	system LengthType
 }
 
-func (l *Length) Convert() float64 {
+func (l *Length) Convert() (float64, error) {
 	if l.value == 0 {
-		return 0
+		return 0, fmt.Errorf("cannot convert zero value")
 	}
-
+	var convertedLength float64
 	if l.system == METRIC {
-		return l.value / INCH_IN_CM
+		convertedLength = l.value * INCH_IN_CM
+	} else {
+		convertedLength = l.value / INCH_IN_CM
 	}
-	return util.RoundToTwoDecimals(l.value * INCH_IN_CM)
+	return util.RoundToTwoDecimals(convertedLength), nil
 }
 
 func NewLength(value float64, system LengthType) *Length {
