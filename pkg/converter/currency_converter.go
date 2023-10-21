@@ -30,6 +30,7 @@ type Currency struct {
 	Currency string
 }
 
+// Remove
 const API_BASE_URL = "https://api.currencyapi.com/v3/latest?apikey="
 const API_KEY = "cur_live_JfqyXEJ9hyM9dWZBOG2Zb1tzVfyEwjvhOkahRuEO"
 
